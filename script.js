@@ -16,13 +16,25 @@ function addTask() {
     span.innerHTML = "\u00d7";
     li.appendChild(span);
   }
+  saveData();
   inputBox.value = "";
 }
 
 function checkedRemove(e) {
   if (e.target.tagName === "LI") {
     e.target.classList.toggle("checked");
+    saveData();
   } else if (e.target.tagName === "SPAN") {
     e.target.parentElement.remove();
+    saveData();
   }
 }
+
+function saveData() {
+  localStorage.setItem("taskList", listContainer.innerHTML);
+}
+function showTask() {
+  listContainer.innerHTML = localStorage.getItem("taskList");
+}
+
+showTask();
